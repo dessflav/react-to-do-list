@@ -1,9 +1,10 @@
-import { UseState } from "react";
+import React, { UseState } from "react";
 import { Tooltip, Tag, List, Button, Popconfirm, Switch } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 const Todo = ({ todo, onTodoRemoval, onTodoToggle }) => {
-  <List.Item
+  return(
+    <List.Item
     actions={[
       <Tooltip
         title={todo.completed ? "Mark as uncompleted" : "Mark as completed"}
@@ -34,7 +35,8 @@ const Todo = ({ todo, onTodoRemoval, onTodoToggle }) => {
         {todo.title}
       </Tag>
     </div>
-  </List.Item>;
+  </List.Item>
+  )
 };
 
 export default Todo;

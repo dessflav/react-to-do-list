@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Layout, Tabs, Row, Col, message, Input } from "antd";
 import TodoTab from "./TodoTab";
 import TodoForm from "./TodoForm";
@@ -7,7 +7,7 @@ import {
   deleteTodo,
   loadTodos,
   updateTodo,
-} from "../Services/todoService";
+} from "../services/todoService";
 
 const { TabPane } = Tabs;
 const { Content } = Layout;
@@ -47,7 +47,7 @@ const TodoList = () => {
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    let data = await loadTodos;
+    let data = await loadTodos();
     setTodos(data);
     setActiveTodos(data.filter((todo) => todo.completed === false));
     setCompletedTodos(data.filter((todo) => todo.completed === true));
@@ -56,24 +56,47 @@ const TodoList = () => {
   }, [refreshing]);
 
   useEffect(() => {
-      refresh();
-  }, [onRefresh])
+    refresh();
+  }, [onRefresh]);
 
   return (
-      <Layout className="layout">
-          <Content style={{ padding: '0 50px'}}>
-              <div className="todolist">
-                  <Row>
-                      <Col span={14} offset={5}>
-                      <h1>V360 Todos</h1>
-                      <TodoForm onFormSubmit={handleFormSubmit}/>
-                      <br />
-                      </Col>
-                  </Row>
-              </div>
-          </Content>
-      </Layout>
-  )
-
-
+    <Layout className="layout">
+      <Content style={{ padding: "0 50px" }}>
+        <div className="todolist">
+          <Row>
+            <Col span={14} offset={5}>
+              <h1>V360 Todos</h1>
+              <TodoForm onFormSubmit={handleFormSubmit} />
+              <br />
+              <Tabs defaultActiveKey="all">
+                <TabPane tab="All" key="all">
+                  <TodoTab
+                    todos={todos}
+                    onTodoToggle={handleToggleTodoStatus}
+                    onTodoRemoval={handleRemoveTodo}
+                  />
+                </TabPane>
+                <TabPane tab="Active" key="active">
+                  <TodoTab
+                    todos={activeTodos}
+                    onTodoToggle={handleToggleTodoStatus}
+                    onTodoRemoval={handleRemoveTodo}
+                  />
+                </TabPane>
+                <TabPane tab="Complete" key="complete">
+                  <TodoTab
+                    todos={completedTodos}
+                    onTodoToggle={handleToggleTodoStatus}
+                    onTodoRemoval={handleRemoveTodo}
+                  />
+                </TabPane>
+              </Tabs>
+            </Col>
+          </Row>
+        </div>
+      </Content>
+    </Layout>
+  );
 };
+
+export default TodoList;
