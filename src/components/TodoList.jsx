@@ -64,7 +64,7 @@ const TodoList = () => {
       <Content style={{ padding: "0 50px" }}>
         <div className="todolist">
           <Row>
-            <Col span={14} offset={5}>
+            <Col span={15} offset={5}>
               <h1>V360 Todos</h1>
               <TodoForm onFormSubmit={handleFormSubmit} />
               <br />

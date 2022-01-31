@@ -26,8 +26,6 @@ const TodoForm = ({ onFormSubmit }) => {
     >
       <Row gutter={20}>
         <Col xs={24} sm={24} md={17} lg={19} xl={20}></Col>
-
-        <Col xs={24} sm={24} md={7} lg={5} xl={4}>
             <Form.Item 
                 name='title'
                 rules={[{ required: true, message: "This field is required"}]}>
@@ -35,6 +33,7 @@ const TodoForm = ({ onFormSubmit }) => {
                     placeholder="What needs to be done?">
                 </Input>
             </Form.Item>
+        <Col xs={24} sm={24} md={7} lg={5} xl={4}>
           <Button type="primary" htmlType="submit" block>
             <PlusCircleFilled />
             Add Todo
