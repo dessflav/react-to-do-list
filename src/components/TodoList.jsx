@@ -24,15 +24,15 @@ const TodoList = () => {
     message.sucess("todo added!");
   };
 
-  const handleRemoveTodo = (todo) => {
-    deleteTodo(todo.id).then(onRefresh());
-    message.warn("Todo removed");
-  };
-
   const handleToggleTodoStatus = (todo) => {
     todo.completed = !todo.completed;
     updateTodo(todo).then(onRefresh());
     message.info("todo status updated");
+  };
+  
+  const handleRemoveTodo = (todo) => {
+    deleteTodo(todo.id).then(onRefresh());
+    message.warn("Todo removed");
   };
 
   const refresh = () => {
